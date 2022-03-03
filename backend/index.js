@@ -10,9 +10,11 @@ io.on("connection", socket => {
         console.log("[DISCONNECT] Connection terminated");
     })
 
-    socket.on("send", (data) => {
-        console.log(data);
-        io.emit("message", data);
+    socket.on("send", (text) => {
+        console.log(text);
+        let time = new Date();
+        time = `${time.getHours()}:${time.getMinutes()}`
+        io.emit("message", {text, time});
 
     })
 })
