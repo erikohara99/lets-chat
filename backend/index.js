@@ -1,7 +1,7 @@
 const app = require("express")();
 const server = require("http").createServer(app);
 const sio = require("socket.io");
-const io = new sio.Server(server);
+const io = new sio.Server(server, {cors: {origin: "*"}});
 
 io.on("connection", socket => {
     console.log("[CONNECT] New connection");
