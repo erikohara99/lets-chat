@@ -10,8 +10,10 @@ io.on("connection", socket => {
         console.log("[DISCONNECT] Connection terminated");
     })
 
-    socket.on("message", (data) => {
+    socket.on("send", (data) => {
         console.log(data);
+        io.emit("message", data);
+
     })
 })
 
