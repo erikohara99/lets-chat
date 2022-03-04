@@ -11,17 +11,6 @@
   animation: post .25s ease;
 }
 
-#footer {
-  box-sizing: border-box;
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background-color: rgb(0, 153, 255);
-  height: 60px;
-  padding: 3px;
-}
-
 input {
   flex: 9;
   border-radius: 6px 0 0 6px;
@@ -44,4 +33,31 @@ button {
 button:hover {
   background-color: rgb(148, 148, 148);
   cursor: pointer;
+}
+
+ul {
+  padding: 0;
+}
+
+ul li {
+  list-style-type: none;
+  padding: 10px 0;
+  border-top: 1px solid back;
+  border-bottom: 1px solid black;
+  padding-left: 20px;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#footer {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  background-color: rgb(0, 153, 255);
+  height: 60px;
+  padding: 3px;
 }

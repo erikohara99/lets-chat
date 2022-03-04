@@ -36,17 +36,23 @@ class App extends Component {
 
   render() { 
     return(
-      <>
-        <br></br>
-        {this.state.chat.length == 0 ? "There are no messages. Try sending one!" : this.state.chat.map(post => {
-          return <h3 class="post">{post.time} - {post.text}</h3>
-        })}
+      <div id="container">
+        <div id="chatbox">
+          <ul>
+            {this.state.socket ? <li>CONNECTED TO CHATROOM. :)</li> : <li>DISCONNECTED - PLEASE TRY AGAIN.</li>}
+            {this.state.chat.length == 0 ? "There are no messages. Try sending one!" : this.state.chat.map(post => {
+              return <li class="post">{post.time} - {post.text}</li>
+            })}
+          </ul>
+        </div>
 
-        <form id="footer" onSubmit={this.handleSubmit}>
-          <input id = "text" type ="text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
-          <button type="submit">Send</button>
-        </form>
-      </>
+        <div>
+          <form id="footer" onSubmit={this.handleSubmit}>
+            <input id = "text" type ="text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </div>
     )
   }
 }
