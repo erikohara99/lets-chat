@@ -27,7 +27,8 @@ class App extends Component {
     this.setState({message: change});
   }
 
-  handleSubmit = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     const {message} = this.state;
     this.state.socket.emit("send", message)
     this.setState({message: ""});
@@ -41,10 +42,10 @@ class App extends Component {
           return <h3 class="post">{post.time} - {post.text}</h3>
         })}
 
-        <div id="footer">
-          <input id = "text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
-          <button onClick={this.handleSubmit}>Send</button>
-        </div>
+        <form id="footer" onSubmit={this.handleSubmit}>
+          <input id = "text" type ="text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
+          <button type="submit">Send</button>
+        </form>
       </>
     )
   }
