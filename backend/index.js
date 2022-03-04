@@ -13,7 +13,7 @@ io.on("connection", socket => {
     socket.on("send", (text) => {
         console.log(text);
         let time = new Date();
-        time = `${time.getHours()}:${time.getMinutes()}`
+        time = `${time.getHours()}:${time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes()}`
         io.emit("message", {text, time});
 
     })
