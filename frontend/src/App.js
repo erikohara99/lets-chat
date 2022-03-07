@@ -14,7 +14,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    this.setState({socket: await io.connect("ws://localhost:8080")});
+    this.setState({socket: await io("ws://localhost:8080")});
     this.state.socket.on("message", (message) => {
       let chat = this.state.chat;
       chat.push(message);
@@ -30,6 +30,7 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const {message} = this.state;
+    if(message.length == 0) return;
     this.state.socket.emit("send", message)
     this.setState({message: ""});
   }
@@ -39,7 +40,6 @@ class App extends Component {
       <div id="container">
         <div id="chatbox">
           <ul>
-            {this.state.socket ? <li>CONNECTED TO CHATROOM. :)</li> : <li>DISCONNECTED - PLEASE TRY AGAIN.</li>}
             {this.state.chat.length == 0 ? "There are no messages. Try sending one!" : this.state.chat.map(post => {
               return <li class="post">{post.time} - {post.text}</li>
             })}
