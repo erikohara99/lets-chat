@@ -46,12 +46,10 @@ class App extends Component {
           </ul>
         </div>
 
-        <div>
-          <form id="footer" onSubmit={this.handleSubmit}>
-            <input id = "text" type ="text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
-            <button type="submit">Send</button>
-          </form>
-        </div>
+        <form id="footer" onSubmit={this.handleSubmit}>
+          <input id = "text" type ="text" placeholder="Type a message" value={this.state.message} onChange={this.handleType}></input>
+          <button type="submit">Send</button>
+        </form>
       </div>
     )
   }
