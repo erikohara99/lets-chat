@@ -37,17 +37,24 @@ button:hover {
 
 ul {
   padding: 0;
+  margin: 0;
   overflow: auto;
 }
 
 ul li {
   list-style-type: none;
   padding: 10px 0;
-  border-top: 1px solid back;
-  border-bottom: 1px solid black;
   padding-left: 20px;
   box-sizing: border-box;
   width: 100vw;
+}
+
+ul li:not(ul li:last-child) {
+  border-bottom: 1px solid black;
+}
+
+ul li:nth-child(odd) {
+  background-color: lightgrey;
 }
 
 #container {

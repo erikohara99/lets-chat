@@ -40,7 +40,7 @@ class App extends Component {
       <div id="container">
         <div id="chatbox">
           <ul>
-            {this.state.chat.length == 0 ? "There are no messages. Try sending one!" : this.state.chat.map(post => {
+            {this.state.chat.length == 0 ? <li>"There are no messages. Try sending one!"</li> : this.state.chat.map(post => {
               return <li class="post">{post.time} - {post.text}</li>
             })}
           </ul>
