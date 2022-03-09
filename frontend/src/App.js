@@ -36,6 +36,16 @@ class App extends Component {
     this.setState({message: ""});
   }
 
+  formatPost = ({time, name, text}) => {
+    return(
+      <>
+        <h6>{time}</h6>
+        <h1>{name}:</h1>
+        <h2>{text}</h2>
+      </>
+    );
+  }
+
   render() { 
 
     let submitButton = this.state.message == "" ? <button disabled>Send</button> : <button type="submit">Send</button>;
@@ -49,7 +59,7 @@ class App extends Component {
         <div id="chatbox">
           <ul>
             {this.state.chat.length == 0 ? <li>There are no messages. Try sending one!</li> : this.state.chat.map(post => {
-              return <li class="post">{post.time} - {post.text}</li>
+              return <li class="post">{this.formatPost(post)}</li>
             })}
           </ul>
         </div>

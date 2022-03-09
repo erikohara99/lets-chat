@@ -14,7 +14,7 @@ io.on("connection", socket => {
         console.log(text);
         let time = new Date();
         time = `${time.getHours()}:${time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes()}`
-        io.emit("message", {text, time});
+        io.emit("message", {text, time, name: "Anonymous"});
 
     })
 })

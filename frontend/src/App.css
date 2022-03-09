@@ -97,3 +97,20 @@ ul li:nth-child(odd) {
   overflow: auto;
   display: flex;
 }
+
+.post h6, .post h1, .post h2 {
+  display: inline;
+}
+
+.post h6 {
+  font-size: 12px;
+}
+
+.post h1, .post h2 {
+  font-size: 18px;
+  margin-left: 10px;
+}
+
+.post h2 {
+  font-weight:initial;
+}
