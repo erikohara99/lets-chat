@@ -1,5 +1,6 @@
 import './App.css';
 import React, { Component, useEffect } from 'react';
+import Logo from "./content/logo.png";
 
 const io = require("socket.io-client")
 
@@ -41,6 +42,10 @@ class App extends Component {
 
     return(
       <div id="container">
+        <div id="header">
+          <img src={Logo}></img>
+        </div>
+
         <div id="chatbox">
           <ul>
             {this.state.chat.length == 0 ? <li>There are no messages. Try sending one!</li> : this.state.chat.map(post => {
