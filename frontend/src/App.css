@@ -1,3 +1,7 @@
+* {
+  --main-blue: rgb(0, 153, 255);
+}
+
 @keyframes post {
   from {
     opacity: 0;
@@ -9,6 +13,11 @@
 
 .post {
   animation: post .25s ease;
+}
+
+.post-server {
+  font-style: italic;
+  color: var(--main-blue, blue);
 }
 
 input {
@@ -69,7 +78,7 @@ ul li:nth-child(odd) {
   box-sizing: border-box;
   display: flex;
   width: 100%;
-  background-color: rgb(0, 153, 255);
+  background-color: var(--main-blue, blue);
   height: 60px;
   padding: 3px;
   position: absolute;
@@ -81,7 +90,7 @@ ul li:nth-child(odd) {
   display: flex;
   align-items: center;
   width: 100%;
-  background-color: rgb(0, 153, 255);
+  background-color: var(--main-blue, blue);
   height: 60px;
   position: absolute;
   top: 0px;

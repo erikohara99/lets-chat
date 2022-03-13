@@ -1,5 +1,5 @@
 import './App.css';
-import React, { Component, useEffect } from 'react';
+import React, {Component} from 'react';
 import Logo from "./content/logo.png";
 
 const io = require("socket.io-client")
@@ -32,7 +32,7 @@ class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const {message} = this.state;
-    if(message.length == 0) return;
+    if(message.length === 0) return;
     this.state.socket.emit("send", message);
     this.setState({message: ""});
   }
@@ -49,18 +49,20 @@ class App extends Component {
 
   render() { 
 
-    let submitButton = this.state.message == "" ? <button disabled>Send</button> : <button type="submit">Send</button>;
+    let submitButton = this.state.message === "" ? <button disabled>Send</button> : <button type="submit">Send</button>;
 
     return(
       <div id="container">
         <div id="header">
-          <img src={Logo}></img>
+          <img src={Logo} alt="Logo of Let's Chat"></img>
         </div>
 
         <div id="chatbox">
           <ul>
-            {this.state.chat.length == 0 ? <li>There are no messages. Try sending one!</li> : this.state.chat.map(post => {
-              return <li class="post">{this.formatPost(post)}</li>
+            {this.state.chat.map((post, index) => {
+              let classes = "post";
+              if(post.server) classes += " post-server";
+              return <li className={classes} key={index}>{this.formatPost(post)}</li>
             })}
           </ul>
         </div>
