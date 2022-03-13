@@ -16,11 +16,12 @@ class App extends Component {
 
   async componentDidMount() {
     this.setState({socket: await io("ws://localhost:8080")});
+
     this.state.socket.on("message", (message) => {
       let chat = this.state.chat;
       chat.push(message);
       this.setState({chat});
-    })
+    });
   };
 
   handleType = (e) => {
@@ -32,7 +33,7 @@ class App extends Component {
     e.preventDefault();
     const {message} = this.state;
     if(message.length == 0) return;
-    this.state.socket.emit("send", message)
+    this.state.socket.emit("send", message);
     this.setState({message: ""});
   }
 

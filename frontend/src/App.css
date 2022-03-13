@@ -54,7 +54,7 @@ ul li:not(ul li:last-child) {
 }
 
 ul li:nth-child(odd) {
-  background-color: lightgrey;
+  background-color: rgb(223, 223, 223);
 }
 
 #container {
