@@ -20,6 +20,13 @@ const emitMessageServer = (text, id = null) => {
 }
 
 const changeNickname = (socket, nickname) => {
+
+    const users = io.sockets.adapter.rooms.get("General");
+    for(let user of users) {
+        user = io.sockets.sockets.get(user);
+        if(user.nickname == nickname) return emitMessageServer("Nickname already taken.", socket.id);
+    }
+
     let old = socket.nickname;
     socket.nickname = nickname;
     emitMessageServer(`'${old}' IS NOW KNOWN AS '${nickname}'.`);
@@ -27,6 +34,7 @@ const changeNickname = (socket, nickname) => {
 
 io.on("connection", socket => {
     console.log("[CONNECT] New connection");
+    socket.join("General");
     socket.nickname = "Anonymous";
     emitMessageServer(`'${socket.nickname}' HAS JOINED THE ROOM.`);
 
