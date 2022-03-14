@@ -3,11 +3,15 @@ const server = require("http").createServer(app);
 const sio = require("socket.io");
 const io = new sio.Server(server, {cors: {origin: "*"}});
 
-const emitMessage = (text, name = "Anonymous") => {
+const emitMessage = (text, socket) => {
+
+    const currentRoom = Array.from(socket.rooms)[1];
+
     let time = new Date();
     time = `${time.getHours()}:${time.getMinutes() >= 10 ? time.getMinutes() : "0" + time.getMinutes()}`;
+    let name = socket.nickname || "Anonymous";
 
-    io.emit("message", {text, time, name});
+    io.to(currentRoom).emit("message", {text, time, name});
 }
 
 const emitMessageServer = (text, id = null) => {
@@ -22,7 +26,8 @@ const emitMessageServer = (text, id = null) => {
 
 const changeNickname = (socket, nickname) => {
 
-    const users = io.sockets.adapter.rooms.get("General");
+    const currentRoom = Array.from(socket.rooms)[1];
+    const users = io.sockets.adapter.rooms.get(currentRoom);
 
     for(let user of users) {
         user = io.sockets.sockets.get(user);
@@ -35,6 +40,11 @@ const changeNickname = (socket, nickname) => {
 }
 
 const joinRoom = (socket, roomId) => {
+
+    const currentRoom = Array.from(socket.rooms)[1];
+
+    emitMessageServer(`User '${socket.nickname}' has left the room.`, currentRoom);
+    socket.leave(currentRoom);
     socket.join(roomId);
     emitMessageServer(`You have joined room '${roomId}'.`, socket.id);
 }
@@ -66,7 +76,7 @@ io.on("connection", socket => {
             return emitMessageServer("Room name must be between 4-12 length.", socket.id);
         }
 
-        return emitMessage(text, socket.nickname);
+        return emitMessage(text, socket);
     })
 })
 
